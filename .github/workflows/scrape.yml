@@ -19,6 +19,7 @@ jobs:
       - name: Fetch data
         run: python main.py
         env:
+          RAYCAST_API_URL: ${{ secrets.RAYCAST_API_URL }}
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
           FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
