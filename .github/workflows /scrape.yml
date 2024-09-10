@@ -1,0 +1,25 @@
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+name: Scrape Data
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Fetch data
+        run: python main.py
+        env:
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
+          FEISHU_TABLE_ID: ${{ secrets.FEISHU_TABLE_ID }}
